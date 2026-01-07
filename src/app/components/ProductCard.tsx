@@ -29,13 +29,9 @@ export function ProductCard({ name, images, description, layoutVariant = 'bottom
     paginate(1);
   };
 
-  // Preload images for instant switching
-  useEffect(() => {
-    images.forEach((src) => {
-      const img = new Image();
-      img.src = src;
-    });
-  }, [images]);
+  // Preload images only when interaction is likely (handled in button hover) or lazily
+  // Removed aggressive useEffect preloader to save bandwidth
+
 
   const variants = {
     enter: (direction: number) => ({
@@ -89,6 +85,7 @@ export function ProductCard({ name, images, description, layoutVariant = 'bottom
               exit="exit"
               src={images[currentImageIndex]}
               alt={name}
+              loading="lazy" // Native lazy loading
               className="col-start-1 row-start-1 w-full h-auto object-cover block"
             />
           </AnimatePresence>
@@ -103,6 +100,12 @@ export function ProductCard({ name, images, description, layoutVariant = 'bottom
                 whileHover={{ scale: 1.1, backgroundColor: "rgba(0,0,0,0.6)" }}
                 whileTap={{ scale: 0.95 }}
                 onClick={prevImage}
+                onMouseEnter={() => {
+                  // Preload previous image on hover of the button
+                  const prevIndex = (currentImageIndex - 1 + images.length) % images.length;
+                  const img = new Image();
+                  img.src = images[prevIndex];
+                }}
                 className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 flex items-center justify-center text-white bg-black/30 backdrop-blur-md rounded-full border border-white/10 transition-all duration-300 z-10"
                 aria-label="Previous image"
               >
@@ -112,6 +115,12 @@ export function ProductCard({ name, images, description, layoutVariant = 'bottom
                 whileHover={{ scale: 1.1, backgroundColor: "rgba(0,0,0,0.6)" }}
                 whileTap={{ scale: 0.95 }}
                 onClick={nextImage}
+                onMouseEnter={() => {
+                  // Preload next image on hover of the button
+                  const nextIndex = (currentImageIndex + 1) % images.length;
+                  const img = new Image();
+                  img.src = images[nextIndex];
+                }}
                 className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 flex items-center justify-center text-white bg-black/30 backdrop-blur-md rounded-full border border-white/10 transition-all duration-300 z-10"
                 aria-label="Next image"
               >
