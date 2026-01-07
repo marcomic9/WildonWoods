@@ -74,6 +74,14 @@ export function ProductCard({ name, images, description, layoutVariant = 'bottom
           className="relative overflow-hidden rounded-xl shadow-lg transition-all duration-500 cursor-zoom-in group-hover:shadow-2xl bg-[#202020] grid grid-cols-1 grid-rows-1"
           onClick={() => setIsLightboxOpen(true)}
         >
+          {/* Structural Spacer - Locks Height to First Image */}
+          <img
+            src={images[0]}
+            alt={name}
+            aria-hidden="true"
+            className="col-start-1 row-start-1 w-full h-auto opacity-0 pointer-events-none select-none relative z-0"
+          />
+
           {/* Main Image Carousel */}
           <AnimatePresence initial={false} custom={direction}>
             <motion.img
@@ -85,8 +93,8 @@ export function ProductCard({ name, images, description, layoutVariant = 'bottom
               exit="exit"
               src={images[currentImageIndex]}
               alt={name}
-              loading="lazy" // Native lazy loading
-              className="col-start-1 row-start-1 w-full h-auto object-cover block"
+              loading="lazy"
+              className="absolute inset-0 w-full h-full object-cover z-10"
             />
           </AnimatePresence>
 
@@ -134,8 +142,9 @@ export function ProductCard({ name, images, description, layoutVariant = 'bottom
             </>
           )}
 
-          {/* Zoom Icon - Subtle */}
-          <div className="absolute top-3 right-3 text-white/90 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none drop-shadow-lg">
+          {/* Zoom Icon with Label */}
+          <div className="absolute top-3 right-3 flex items-center gap-2 text-white/90 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none drop-shadow-lg">
+            <span className="text-xs uppercase tracking-wider font-medium" style={{ fontFamily: 'var(--font-sans)' }}>Click to expand</span>
             <ZoomIn className="w-5 h-5" />
           </div>
         </div>
@@ -169,25 +178,15 @@ export function ProductCard({ name, images, description, layoutVariant = 'bottom
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-xl p-4 md:p-8"
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-xl p-4 md:p-8"
             onClick={() => setIsLightboxOpen(false)}
           >
-            <motion.button
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.8 }}
-              onClick={() => setIsLightboxOpen(false)}
-              className="absolute top-4 right-4 md:top-8 md:right-8 w-12 h-12 flex items-center justify-center text-white/50 hover:text-white hover:bg-white/10 rounded-full transition-all"
-            >
-              <X className="w-8 h-8" />
-            </motion.button>
-
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className="relative max-w-7xl w-full max-h-[90vh] flex flex-col items-center"
+              className="relative max-w-7xl w-full max-h-[90vh] flex flex-col items-center z-10"
               onClick={(e) => e.stopPropagation()}
             >
               <img
@@ -220,6 +219,17 @@ export function ProductCard({ name, images, description, layoutVariant = 'bottom
                 </>
               )}
             </motion.div>
+
+            {/* Close Button - Moved after content and z-index increased */}
+            <motion.button
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.8 }}
+              onClick={() => setIsLightboxOpen(false)}
+              className="absolute top-4 right-4 md:top-8 md:right-8 w-12 h-12 flex items-center justify-center text-white/50 hover:text-white hover:bg-white/10 rounded-full transition-all z-50 cursor-pointer"
+            >
+              <X className="w-8 h-8" />
+            </motion.button>
           </motion.div>
         )}
       </AnimatePresence>
