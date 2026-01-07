@@ -23,14 +23,14 @@ export default function App() {
           >
             {/* Logo Icon */}
             <div className="w-12 h-12 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
-              <img src="/images/logo.png" alt="Wild on Woods Logo" className="w-full h-full object-contain" />
+              <img src="/images/logo.png" alt="Wild on Wood Logo" className="w-full h-full object-contain" />
             </div>
             <div>
               <div
                 className="text-xl tracking-tight leading-tight"
                 style={{ fontFamily: 'var(--font-serif)' }}
               >
-                Wild on Woods
+                Wild on Wood
               </div>
               <div
                 className="text-xs text-[#b8956a] uppercase tracking-widest"

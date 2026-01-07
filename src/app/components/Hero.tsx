@@ -10,10 +10,12 @@ export function Hero() {
     <section className="relative h-screen w-full overflow-hidden">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0">
-        <img 
-          src="/images/products/hero-bg.png" 
+        <img
+          src="/images/products/hero-bg.png"
           alt="Luxury safari lodge interior"
           className="h-full w-full object-cover"
+          fetchPriority="high"
+          loading="eager"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-[#1a1a1a]" />
       </div>
@@ -21,10 +23,10 @@ export function Hero() {
       {/* Lion Silhouette SVG Overlay */}
       <div className="absolute right-0 top-1/2 -translate-y-1/2 opacity-10">
         <svg width="500" height="500" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M250 100C200 100 150 130 150 180C150 200 160 220 180 235C160 250 150 270 150 290C150 340 200 380 250 380C300 380 350 340 350 290C350 270 340 250 320 235C340 220 350 200 350 180C350 130 300 100 250 100Z" fill="#b8956a" fillOpacity="0.3"/>
-          <circle cx="230" cy="170" r="8" fill="#b8956a" fillOpacity="0.3"/>
-          <circle cx="270" cy="170" r="8" fill="#b8956a" fillOpacity="0.3"/>
-          <path d="M200 150C190 140 180 135 170 140M300 150C310 140 320 135 330 140M180 200C170 210 165 220 165 230M320 200C330 210 335 220 335 230" stroke="#b8956a" strokeWidth="3" strokeOpacity="0.3" strokeLinecap="round"/>
+          <path d="M250 100C200 100 150 130 150 180C150 200 160 220 180 235C160 250 150 270 150 290C150 340 200 380 250 380C300 380 350 340 350 290C350 270 340 250 320 235C340 220 350 200 350 180C350 130 300 100 250 100Z" fill="#b8956a" fillOpacity="0.3" />
+          <circle cx="230" cy="170" r="8" fill="#b8956a" fillOpacity="0.3" />
+          <circle cx="270" cy="170" r="8" fill="#b8956a" fillOpacity="0.3" />
+          <path d="M200 150C190 140 180 135 170 140M300 150C310 140 320 135 330 140M180 200C170 210 165 220 165 230M320 200C330 210 335 220 335 230" stroke="#b8956a" strokeWidth="3" strokeOpacity="0.3" strokeLinecap="round" />
         </svg>
       </div>
 
@@ -39,7 +41,7 @@ export function Hero() {
           <div className="h-1 w-24 bg-[#b8956a]" />
         </motion.div>
 
-        <motion.h1 
+        <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.4 }}
@@ -49,7 +51,7 @@ export function Hero() {
           Artistry of the Wild
         </motion.h1>
 
-        <motion.p 
+        <motion.p
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.6 }}

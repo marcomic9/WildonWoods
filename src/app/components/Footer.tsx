@@ -18,7 +18,7 @@ export function Footer() {
               className="text-4xl md:text-5xl mb-6"
               style={{ fontFamily: 'var(--font-serif)' }}
             >
-              Wild on Woods Factory
+              Wild on Wood Factory
             </h3>
             <p
               className="text-lg text-[#a8a8a0] mb-8 max-w-md leading-relaxed"
@@ -94,7 +94,7 @@ export function Footer() {
             className="text-sm text-[#a8a8a0]"
             style={{ fontFamily: 'var(--font-sans)' }}
           >
-            © {new Date().getFullYear()} Wild on Woods Factory. All rights reserved.
+            © {new Date().getFullYear()} Wild on Wood Factory. All rights reserved.
           </p>
 
           <div className="flex items-center gap-8">
